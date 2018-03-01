@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: {{ template "fullname" . }}
-        image: "bitnami/apache:{{ .Values.imageTag }}"
+        image: "registry.ng.bluemix.net/bitnami-bx-test/apache:{{ .Values.imageTag }}"
         imagePullPolicy: {{ default "" .Values.imagePullPolicy | quote }}
         ports:
         - name: http

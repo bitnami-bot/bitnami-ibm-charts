@@ -1,6 +1,6 @@
 ## Bitnami MariaDB image
 image:
-  name: bitnami/mariadb
+  name: registry.ng.bluemix.net/bitnami-bx-test/mariadb
   tag: 10.1.28-r2
   pullPolicy: IfNotPresent
 
