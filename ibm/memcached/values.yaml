@@ -1,0 +1,32 @@
+## Bitnami Memcached image version
+## ref: https://hub.docker.com/r/bitnami/memcached/tags/
+##
+image: bitnami/memcached:1.5.6-r0
+
+## Specify a imagePullPolicy
+## ref: http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
+##
+imagePullPolicy: IfNotPresent
+
+## Memcached admin user
+## ref: https://github.com/bitnami/bitnami-docker-memcached#creating-the-memcached-admin-user
+##
+# memcachedUsername:
+
+## Memcached admin password
+## ref: https://github.com/bitnami/bitnami-docker-memcached#creating-the-memcached-admin-user
+##
+# memcachedPassword:
+
+## Kubernetes configuration
+## For minikube, set this to NodePort, elsewhere use LoadBalancer
+##
+serviceType: ClusterIP
+
+## Configure resource requests and limits
+## ref: http://kubernetes.io/docs/user-guide/compute-resources/
+##
+resources:
+  requests:
+    memory: 256Mi
+    cpu: 250m

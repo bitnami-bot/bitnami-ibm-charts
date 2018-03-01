@@ -1,0 +1,92 @@
+## Bitnami MariaDB image
+image:
+  name: bitnami/mariadb
+  tag: 10.1.28-r2
+  pullPolicy: IfNotPresent
+
+service:
+  ## Kubernetes service type
+  type: ClusterIP
+  port: 3306
+
+root:
+  ## MariaDB admin password
+  ## ref: https://github.com/bitnami/bitnami-docker-mariadb#setting-the-root-password-on-first-run
+  ##
+  password:
+
+db:
+  ## MariaDB username and password
+  ## ref: https://github.com/bitnami/bitnami-docker-mariadb#creating-a-database-user-on-first-run
+  ##
+  user:
+  password:
+  ## Database to create
+  ## ref: https://github.com/bitnami/bitnami-docker-mariadb#creating-a-database-on-first-run
+  ##
+  name: my_database
+
+replication:
+  ## MariaDB replication user
+  ## ref: https://github.com/bitnami/bitnami-docker-mariadb#setting-up-a-replication-cluster
+  ##
+  user: replicator
+  ## MariaDB replication user password
+  ## ref: https://github.com/bitnami/bitnami-docker-mariadb#setting-up-a-replication-cluster
+  ##
+  password:
+
+master:
+  antiAffinity: soft
+  ## Enable persistence using Persistent Volume Claims
+  ## ref: http://kubernetes.io/docs/user-guide/persistent-volumes/
+  ##
+  persistence:
+    ## If true, use a Persistent Volume Claim, If false, use emptyDir
+    ##
+    enabled: true
+    ## Persistent Volume Storage Class
+    ## If defined, storageClassName: <storageClass>
+    ## If set to "-", storageClassName: "", which disables dynamic provisioning
+    ## If undefined (the default) or set to null, no storageClassName spec is
+    ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
+    ##   GKE, AWS & OpenStack)
+    ##
+    # storageClass: "-"
+    ## Persistent Volume Claim annotations
+    ##
+    annotations:
+    ## Persistent Volume Access Mode
+    ##
+    accessModes:
+    - ReadWriteOnce
+    ## Persistent Volume size
+    ##
+    size: 8Gi
+  ## Configure master resource requests and limits
+  ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
+  ##
+  resources: {}
+
+slave:
+  replicas: 1
+  antiAffinity: soft
+  hpa:
+    min: 1
+    max: 3
+    target:
+      cpuPercentage: 75
+  ## Configure slave resource requests and limits
+  ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
+  ##
+  resources: {}
+
+metrics:
+  enabled: false
+  image: prom/mysqld-exporter
+  imageTag: v0.10.0
+  imagePullPolicy: IfNotPresent
+  resources: {}
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "9104"

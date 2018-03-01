@@ -1,0 +1,19 @@
+name: mariadb-cluster
+version: 0.5.0
+appVersion: 10.1.28
+description: Chart to create a Highly available MariaDB cluster
+keywords:
+- mariadb
+- mysql
+- database
+- sql
+- cluster
+- high availablity
+home: https://mariadb.org
+sources:
+- https://github.com/bitnami/bitnami-docker-mariadb
+maintainers:
+- name: Bitnami
+  email: containers@bitnami.com
+engine: gotpl
+icon: https://bitnami.com/assets/stacks/mariadb/img/mariadb-stack-110x117.png
